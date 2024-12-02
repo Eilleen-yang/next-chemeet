@@ -1,19 +1,22 @@
 [![image](https://github.com/user-attachments/assets/31cc3274-77ab-4885-a15c-0006cf73d129)](https://chemeet.vercel.app/)
 
+---
+
+※ 현재 이 저장소는 리팩토링 진행중인 저장소이므로 기존 프로젝트 정보 및 과정은 Organizations을 참고해주시기 바랍니다.
+
+- [CHEMEET - Organiztions](https://github.com/woongteco)
+
 # 케밋 프로젝트
 
 케밋(CHEMEET)은 기존 유데미 큐레이션([https://udemy.wjtb.co.kr/](https://udemy.wjtb.co.kr/))에서 확장된, 학습자에게 제공할 수 있는 강의에 대한 외부 SaaS형 추가 스터디 서비스로 기획되었습니다.
 
 ## 개발 기간
 
-|    | (총 11주) |
-| --- | --- |
-| 코스 내 프로젝트 진행 | **2024.06.17 - 2024.08.01** |  
-| 추가 기능 개발 진행 | **2024.08.05 - 2024.08.30** |
-
-## 상세 보기
-
-[Repository/Code](https://github.com/woongteco/nextcamp-12t)
+| 진행사항              | 기간                        |
+| --------------------- | --------------------------- |
+| 코스 내 프로젝트 진행 | **2024.06.17 - 2024.08.01** |
+| 추가 기능 개발 진행   | **2024.08.05 - 2024.08.30** |
+| 리펙토링 진행         | **2024.12.01 - 진행 중**    |
 
 ## 기술 스택
 
@@ -27,19 +30,6 @@
 ## 아키텍처 다이어그램
 
 ![Architecture-케밋 아키텍처](https://github.com/user-attachments/assets/071be105-50c2-4875-b9ab-8fae2d5424e2)
-
-## 핵심 기능 (개발중)
-
-- [x] 회원가입/로그인 및 소셜 로그인(Kakao, Google +)
-- [x] 로그인 세션에 따른 라우트 접근
-- [x] 글, 댓글 CRUD (Create, Read, Update, Delete)
-- [x] 회원 정보 RU (Read, Update)
-- [ ] 스터디 찜, 지원
-
-## 부가 기능 (개발중)
-
-- [ ] 댓글, 답글 추가시 사용자 알림
-- [x] 이미지 저장 시 이미지 압축 및 CDN으로 사용
 
 ## 기획
 
@@ -68,20 +58,3 @@
 ### 메인 페이지 화면
 
 ![image](https://github.com/user-attachments/assets/458fe4b7-993d-4fff-a281-f67bd65080dc)
-
-## 팀 웅테코
-
-### 멤버들 (3명)
-
-| [<img src="https://avatars.githubusercontent.com/yangareum1818" width="200">](https://github.com/yangareum1818) | [<img src="https://avatars.githubusercontent.com/callmebyneon" width="200">](https://github.com/callmebyneon) | [<img src="https://avatars.githubusercontent.com/oweaj" width="200">](https://github.com/oweaj) |
-| :-------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-|                                   [양아름](https://github.com/yangareum1818)                                    |                                   [이나연](https://github.com/callmebyneon)                                   |                               [장재우](https://github.com/oweaj)                                |
-|                               [@yangareum1818](https://github.com/yangareum1818)                                |                               [@callmebyneon](https://github.com/callmebyneon)                                |                               [@oweaj](https://github.com/oweaj)                                |
-|                                               팀장, 최고의 행동력                                               |                                          서기, 일할 때 한정 대문자 J                                          |                                    총무, 예비 백엔드 개발자                                     |
-
-_And Special thanks to our mentor ... [Hero](https://github.com/hero-dataheroes)_
-
-### 프로젝트 캠프 : Next.js 과정 (1기)
-
-| 스나이퍼팩토리 | 유데미 | 웅진씽크빅 | 고용노동부 |
-| :------------: | :----: | :--------: | :--------: |
