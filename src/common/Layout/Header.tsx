@@ -5,8 +5,6 @@ import Link from "next/link";
 import LogoSvg from "../Atoms/Image/Logo";
 
 export default async function Header() {
-  const session = await getSession();
-
   return (
     <header className="fixed top-0 w-full bg-white z-header border-b border-b-line-normal">
       <Container>
@@ -31,17 +29,7 @@ export default async function Header() {
               </ul>
             </nav>
           </div>
-          {session ? (
-            <SessionedHeader sessionId={session.user.id} />
-          ) : (
-            <Link
-              href="/login"
-              type="button"
-              className="py-2 px-4 border border-solid border-main-600 rounded-[.6rem] text-main-600 font-semibold"
-            >
-              로그인
-            </Link>
-          )}
+          <SessionedHeader />
         </div>
       </Container>
     </header>

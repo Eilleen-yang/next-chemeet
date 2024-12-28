@@ -10,21 +10,19 @@ import { cfetch } from "@/utils/customFetch";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAlert } from "@/lib/actions/AlertAction";
 import { TAlert, TAlertItem } from "@/types/model/Alert";
-import { useSession } from "next-auth/react";
 
 export default function DesktopMenu({
   profileImage,
+  userId,
 }: {
   profileImage: ReactNode;
+  userId: string;
 }) {
   const queryClient = useQueryClient();
 
-  const { data: session } = useSession();
-  const userId = session?.user.id as string;
-
   const { data } = useQuery({
     queryKey: ["alert", userId],
-    queryFn: ({ queryKey }) => getAlert(queryKey[1]),
+    queryFn: () => getAlert(userId),
   });
   const dataList: TAlert[] = useMemo(() => data?.data || [], [data]);
 
@@ -107,7 +105,7 @@ export default function DesktopMenu({
               {commentReadList.length ? (
                 alertList.map((alert) => (
                   <li
-                    key={alert.comments[0].comment}
+                    key={alert.comments[0]._id}
                     className="relative"
                     onClick={() =>
                       handleReadAlert(alert.comments[0]._id, "no-all")
