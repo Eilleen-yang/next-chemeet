@@ -86,8 +86,6 @@ export async function updateUserData(id: string, updateDoc: UpdateDocument) {
   await connectDB();
 
   const check = await User.exists({ _id: id });
-  console.log({ exist: check });
-
   try {
     const update = await User.findOneAndUpdate({ _id: id }, updateDoc, {
       new: true,
@@ -96,7 +94,6 @@ export async function updateUserData(id: string, updateDoc: UpdateDocument) {
     if (!update) {
       return { state: false, message: "해당 프로필을 찾을 수 없습니다." };
     }
-    console.log("update", { update });
 
     revalidatePath("/my/profile");
 
@@ -105,7 +102,6 @@ export async function updateUserData(id: string, updateDoc: UpdateDocument) {
       message: "프로필 정보가 변경되었습니다.",
     };
   } catch (error: any) {
-    console.log("get profile" + error);
     return { state: false, message: "프로필 정보 로딩에 실패했습니다." };
   }
 }
