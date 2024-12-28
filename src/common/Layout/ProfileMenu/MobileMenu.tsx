@@ -5,7 +5,7 @@ import { MenuIcon } from "../../Atoms/Image/Icon";
 import { TProfileImage } from "./ResponsiveMenu";
 import Link from "next/link";
 import Image from "next/image";
-import { AlarmIcon, CreateStudyIcon } from "@public/icons";
+import { CreateStudyIcon } from "@public/icons";
 import DefaultProfileMenuItems from "./DefaultProfileMenuItems";
 import { useEffect } from "react";
 
