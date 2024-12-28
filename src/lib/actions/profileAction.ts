@@ -3,10 +3,10 @@
 import { revalidatePath } from "next/cache";
 import connectDB from "../db";
 import { User } from "../schema";
-import { getSession } from "@/auth";
 import { UserSchema } from "@/types/model/User";
 import { supabase } from "../supabase";
 import { nanoid } from "nanoid";
+import { error } from "console";
 
 /**
  * 사용자 프로필 정보 업데이트
@@ -48,10 +48,7 @@ export async function updateProfile(id: string, formData: FormData) {
  * 관심 카테고리 저장
  * SetCategoryFavor 모달에서 사용
  */
-export async function saveMyCategory(formData: FormData) {
-  const session = await getSession();
-  const userId = session?.user.id;
-
+export async function saveMyCategory(userId: string, formData: FormData) {
   if (!userId) {
     return { state: false, message: "유효한 id가 필요합니다." };
   }
@@ -61,7 +58,7 @@ export async function saveMyCategory(formData: FormData) {
   const my_category = JSON.parse(formData.get("my_category") as string);
 
   try {
-    await User.findOneAndUpdate({ userId }, { my_category }, { new: true });
+    await User.findOneAndUpdate({ _id: userId }, { my_category });
 
     return {
       state: true,
@@ -85,7 +82,6 @@ type UpdateDocument = Partial<NonStaticUserData>;
 export async function updateUserData(id: string, updateDoc: UpdateDocument) {
   await connectDB();
 
-  const check = await User.exists({ _id: id });
   try {
     const update = await User.findOneAndUpdate({ _id: id }, updateDoc, {
       new: true,
@@ -106,14 +102,14 @@ export async function updateUserData(id: string, updateDoc: UpdateDocument) {
   }
 }
 
-export async function supabaseUploadImage(formData: FormData) {
+export async function supabaseUploadImage(doc: string, formData: FormData) {
   const file = formData.get("file") as File;
   const fileName = nanoid();
 
   try {
     const { error } = await supabase.storage
       .from("image")
-      .upload(`profile_image/${fileName}`, file);
+      .upload(`${doc}/${fileName}`, file);
 
     if (error) {
       return { state: false, message: "이미지 파일이 업로드 되지않았습니다." };
@@ -121,9 +117,31 @@ export async function supabaseUploadImage(formData: FormData) {
 
     const { data } = supabase.storage
       .from("image")
-      .getPublicUrl(`profile_image/${fileName}`);
+      .getPublicUrl(`${doc}/${fileName}`);
 
     return { state: true, result: data.publicUrl };
+  } catch (error) {
+    return { state: false, message: "이미지 업로드에 실패했습니다." };
+  }
+}
+
+export async function supabaseDeleteImage(doc: string, fileUrl: string | null) {
+  if (!fileUrl) {
+    return { state: false, message: "이미지 파일을 찾을 수 없습니다." };
+  }
+
+  const path = fileUrl.split("/");
+  const fileName = path.at(-1);
+
+  try {
+    const { error } = await supabase.storage
+      .from("image")
+      .remove([`${doc}/${fileName}`]);
+
+    if (error) {
+      return { state: false };
+    }
+    return { state: true };
   } catch (error) {
     return { state: false, message: "이미지 업로드에 실패했습니다." };
   }

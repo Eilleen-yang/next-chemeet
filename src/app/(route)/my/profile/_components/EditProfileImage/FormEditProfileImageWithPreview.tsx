@@ -12,6 +12,7 @@ import Button from "@/common/Atoms/Form/Button";
 import {
   updateUserData,
   supabaseUploadImage,
+  supabaseDeleteImage,
 } from "@/lib/actions/profileAction";
 import { resizeFile } from "@/utils/resizeFile";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -42,7 +43,7 @@ export default function FormEditProfileImageWithPreview({
       <ProfileImagePreviewModal
         imageUrl={imageUrl}
         getImage={getImage}
-        onSave={() => updateMutaion.mutate()}
+        onSave={() => updateMutation.mutate()}
       />
     ),
   });
@@ -120,33 +121,7 @@ export default function FormEditProfileImageWithPreview({
       const previewUrl = URL.createObjectURL(file);
       setImageUrl(previewUrl);
 
-      const resizeImage = await resizeFile(file);
-
-      const formData = new FormData();
-      formData.append("file", resizeImage);
-
-      const upload = await supabaseUploadImage(formData);
-
-      if (upload.state && upload.result) {
-        setImageUrl(upload.result);
-      } else {
-        handleAlert("error", upload.message);
-      }
-    }
-  }
-
-  async function onSave() {
-    try {
-      const result = await updateUserData(id, { profile_img: imageUrl });
-
-      if (result.state) {
-        close();
-        handleAlert("success", result.message);
-      } else {
-        handleAlert("error", result.message);
-      }
-    } catch (error) {
-      console.error(error);
+      uploadMutaion.mutate(file);
     }
   }
 
@@ -156,18 +131,7 @@ export default function FormEditProfileImageWithPreview({
       return;
     }
 
-    try {
-      const result = await updateUserData(id, { profile_img: "" });
-      setImageUrl("");
-
-      if (result.state) {
-        handleAlert("success", result.message);
-      } else {
-        handleAlert("error", result.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    deleteMutation.mutate();
   }
 
   return (
@@ -176,7 +140,7 @@ export default function FormEditProfileImageWithPreview({
         <div className="flex items-center gap-4">
           <ProfileImg
             size="xlarge"
-            src={imageUrl || DummyProfileImg}
+            src={imgCheck || DummyProfileImg}
             alt="프로필 이미지 미리보기"
           />
           <ImageInputWithButton

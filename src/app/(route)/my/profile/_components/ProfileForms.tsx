@@ -8,31 +8,21 @@ import FormUpdatePhoneNumber from "./UpdatePhoneNumber/FormUpdatePhoneNumber";
 import DeleteAccountConfirm from "./DeleteAccountConfirm";
 import { getUserData } from "@/lib/actions/userAction";
 import { ProfileSchema } from "@/types/model/User";
+import { QueryClient } from "@tanstack/react-query";
 
 export default async function ProfileForms() {
+  const queryClient = new QueryClient();
   const session = await getSession();
-
-  if (session === null) {
-    return notFound();
-  }
-
-  const userId = session.user.id;
-  const sessionProvider = session.account.provider;
-  const userData = await getUserData(userId);
-
-  let profile: ProfileSchema = userData.data;
-  let clientProfile = JSON.parse(JSON.stringify(profile));
+  const userId = session?.user.id as string;
+  const sessionProvider = session?.account.provider;
 
   return (
     <div className="gridContent grid xl:grid-cols-[5fr_4fr] xl:items-start gap-gutter-xl">
       <div className="flex flex-col gap-8">
-        <p className="text-H2 text-label-dimmed">{session.user.name}</p>
-        <FormEditProfileImageWithPreview
-          id={userId}
-          initProfileUrl={profile.profile_img || ""}
-        />
+        <p className="text-H2 text-label-dimmed">{session?.user.name}</p>
+        <FormEditProfileImageWithPreview userId={userId} />
         <div className="w-full h-[1px] border-t border-t-line-normal"></div>
-        <FormEditProfile profile={clientProfile} />
+        <FormEditProfile userId={userId} />
         {sessionProvider === "credentials" && (
           <>
             <div className="w-full h-[1px] border-t border-t-line-normal"></div>
@@ -42,7 +32,7 @@ export default async function ProfileForms() {
             <SectionTitle size="md" className="mb-2">
               연락처 수정
             </SectionTitle>
-            <FormUpdatePhoneNumber defaultValue={profile.phone} />
+            <FormUpdatePhoneNumber userId={userId} />
             <div className="w-full h-[1px] border-t border-t-line-normal"></div>
             <DeleteAccountConfirm />
           </>
