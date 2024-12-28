@@ -1,6 +1,6 @@
 "use server";
 
-import { TAlertItem } from "@/types/model/Alert";
+import { TAlert, TAlertItem } from "@/types/model/Alert";
 import connectDB from "../db";
 import { Alert } from "../schema";
 
@@ -12,7 +12,9 @@ export async function getAlert(userId: string) {
   await connectDB();
 
   try {
-    const result = await Alert.find({ userId }).select("alertList allRead");
+    const result: TAlert[] = await Alert.find({ userId }).select(
+      "alertList allRead"
+    );
 
     if (!result) {
       return { state: false };

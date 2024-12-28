@@ -1,5 +1,4 @@
 export type TAlertItem = {
-  id?: string;
   type: "post" | "study";
   typeId: string;
   title: string;
@@ -14,4 +13,11 @@ export type TAlert = {
   _id: string;
   alertList: TAlertItem[];
   allRead: boolean;
+};
+
+export type TAlertSort = {
+  type: "post" | "study";
+  comments: {
+    read: boolean;
+  }[];
 };
