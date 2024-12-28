@@ -6,7 +6,6 @@ import { User } from "../schema";
 import { UserSchema } from "@/types/model/User";
 import { supabase } from "../supabase";
 import { nanoid } from "nanoid";
-import { error } from "console";
 
 /**
  * 사용자 프로필 정보 업데이트
@@ -15,8 +14,6 @@ export async function updateProfile(id: string, formData: FormData) {
   const position_tag = formData.get("positionTag") as string;
   const introduce = formData.get("introduce") as string;
   const my_category = JSON.parse(formData.get("myCategory") as string);
-
-  console.log("update", { position_tag, introduce, my_category });
 
   try {
     const update = await User.findOneAndUpdate(

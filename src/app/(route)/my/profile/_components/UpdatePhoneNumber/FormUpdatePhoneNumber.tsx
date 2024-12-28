@@ -43,7 +43,7 @@ export default function FormUpdatePhoneNumber({ userId }: { userId: string }) {
         <div className="flex gap-4 items-center">
           <Input.Text
             name="phone"
-            placeholder="핸드폰 번호를 입력하세요"
+            placeholder="핸드폰 번호(숫자만)를 입력하세요"
             className="w-full"
             onChange={handlePhoneInput}
             value={phoneData}
