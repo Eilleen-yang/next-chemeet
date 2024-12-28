@@ -1,19 +1,19 @@
+import Link from "next/link";
 import Profile from "@/common/Molecules/Profile";
 import ContentArea from "@/common/Organisms/ContentArea";
 import { getSession } from "@/auth";
+import { notFound } from "next/navigation";
+import { revalidateTag } from "next/cache";
 import ReturnToListButton from "../_components/ReturnToListButton";
 import LinkedStudyCard from "../_components/LinkedStudyCard";
 import CommentArea from "@/common/Templates/CommentArea";
 import ShareIconButton from "../../_components/ShareIconButton";
 import LikeIconButton from "../../_components/LikeIconButton";
-import { PostDataFull, PostDataListItem } from "@/types/model/PostItem";
-import { getCreatedBefore } from "@/utils/getCreatedBefore";
-import { Post } from "@/lib/schema";
-import { notFound } from "next/navigation";
 import DeletePostButton from "../../_components/DeletePostButton";
-import Link from "next/link";
-import { revalidateTag } from "next/cache";
+import { PostDataListItem } from "@/types/model/PostItem";
+import { Post } from "@/lib/schema";
 import { NULL_USER_FOR_PROFILE } from "@/constants/null_user";
+import { getCreatedBefore } from "@/utils/getCreatedBefore";
 import { cfetch } from "@/utils/customFetch";
 
 async function increaseViewCount(postId: string) {
@@ -87,11 +87,7 @@ export default async function PostDetail({
             </p>
             <div className="flex gap-4 items-center ml-auto">
               <ShareIconButton width="32" height="32" />
-              <LikeIconButton
-                count={post.like}
-                postId={postId}
-                sessionId={session?.user.id}
-              />
+              <LikeIconButton count={post.like} postId={postId} />
             </div>
           </div>
         </div>
