@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import RQProvider from "./_components/RQProvider";
+import AuthSession from "./_components/AuthSession";
 const notosans = Noto_Sans_KR({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   style: ["normal"],
@@ -38,10 +40,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={notosans.className}>
-        <Toaster position="bottom-center" />
-        {children}
-      </body>
+      <RQProvider>
+        <AuthSession>
+          <body className={notosans.className}>
+            <Toaster position="bottom-center" />
+            {children}
+          </body>
+        </AuthSession>
+      </RQProvider>
     </html>
   );
 }
