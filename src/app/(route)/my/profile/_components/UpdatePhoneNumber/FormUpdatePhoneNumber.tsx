@@ -1,3 +1,5 @@
+"use client";
+
 import Input from "@/common/Molecules/Form/Input";
 import ProfileInputArea from "../ProfileInputArea";
 import Button from "@/common/Atoms/Form/Button";

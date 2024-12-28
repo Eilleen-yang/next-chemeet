@@ -53,7 +53,7 @@ export default async function SessionedHeader() {
                   className="object-cover min-w-full h-full"
                 />
               </span>
-              <span className="pl-4 lg:hidden">{user.name}</span>
+              <span className="pl-4 lg:hidden">{user?.name}</span>
             </div>
           }
         />

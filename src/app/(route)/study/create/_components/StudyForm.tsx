@@ -19,7 +19,6 @@ import ThumbnailInput from "./ThumbnailInput";
 
 import handleAlert from "@/common/Molecules/handleAlert";
 import { useRouter } from "next/navigation";
-import { createStudy } from "@/lib/actions/studyAction";
 import { StudySchema } from "@/types/model/StudyCard";
 import { cfetch } from "@/utils/customFetch";
 import SelectCategory from "./SelectCategory";

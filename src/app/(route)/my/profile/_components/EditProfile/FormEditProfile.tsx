@@ -10,9 +10,7 @@ import {
 } from "@/constants/categories/job_category";
 import { useRouter } from "next/navigation";
 import { updateProfile } from "@/lib/actions/profileAction";
-import { ProfileSchema } from "@/types/model/User";
 import handleAlert from "@/common/Molecules/handleAlert";
-import { useSession } from "next-auth/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getUserData } from "@/lib/actions/userAction";
 
@@ -83,7 +81,7 @@ export default function FormEditProfile({ userId }: { userId: string }) {
           defaultValue={profile?.introduce}
         />
       </ProfileInputArea>
-      {profile.provider === "credentials" && (
+      {profile === "credentials" && (
         <ProfileInputArea label="이메일">
           <Input.Email
             name="email"
