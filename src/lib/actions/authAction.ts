@@ -86,6 +86,20 @@ export async function login(formData: FormData) {
   }
 }
 
+// 소셜로그인
+export async function kakaoLogin() {
+  await signIn("kakao");
+}
+
+export async function googleLogin() {
+  await signIn("google");
+}
+
+export async function githubLogin() {
+  await signIn("github");
+}
+
+// 이메일 찾기
 export async function findEmail(formData: FormData) {
   const name = formData.get("name") as string;
   const phone = formData.get("phone") as string;
