@@ -40,6 +40,7 @@ export default async function SessionedHeader() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
+      <div>ddd</div>
       <div data-name="header__right-side__profile">
         <ResponsiveMenu
           profileImage={
