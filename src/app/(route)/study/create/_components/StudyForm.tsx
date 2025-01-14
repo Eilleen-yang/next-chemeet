@@ -54,7 +54,9 @@ export default function StudyForm({
       );
   };
 
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(
+    defaultValue?.studyInfo.thumbnailUrl || null
+  );
 
   // 스터디 카테고리
   const [jobCategory, setJobCategory] = useState<CategoryOption | null>({

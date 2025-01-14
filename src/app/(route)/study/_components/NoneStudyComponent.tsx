@@ -9,7 +9,7 @@ export default function NoneStudyComponent() {
         <br />첫 스터디를 만들어보세요!
       </p>
       <Link
-        href={"/studyroom/create"}
+        href={"/study/create"}
         className="block py-3 px-4 bg-main-500 text-white font-semibold rounded-2xl"
       >
         스터디 개설하기
