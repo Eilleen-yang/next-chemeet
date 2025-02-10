@@ -193,6 +193,8 @@ export default function StudyForm({
 
     if (imageUrl) {
       formData.append("thumbnailUrl", imageUrl);
+    } else {
+      formData.append("thumbnail", "");
     }
 
     if (jobCategory) {

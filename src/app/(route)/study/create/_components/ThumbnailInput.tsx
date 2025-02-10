@@ -40,10 +40,12 @@ export default function ThumbnailInput({
       const upload = await supabaseUploadImage("study", formDate);
       console.log(upload);
       if (upload.state && upload.result) {
-        setImageUrl(upload.result);
+        setImageUrl(upload.result || "");
       } else {
         handleAlert("error", upload.message);
       }
+    } else {
+      setImageUrl(null);
     }
   }
 
