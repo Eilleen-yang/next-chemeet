@@ -8,8 +8,8 @@ import { ReactNode, useMemo } from "react";
 import AlertList from "@/app/_components/AlertList";
 import { cfetch } from "@/utils/customFetch";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAlert } from "@/lib/actions/AlertAction";
 import { TAlert, TAlertItem } from "@/types/model/Alert";
+import { getAlert } from "@/lib/actions/alertAction";
 
 export default function DesktopMenu({
   profileImage,
@@ -68,7 +68,7 @@ export default function DesktopMenu({
   }
 
   return (
-    <div className="gap-8 items-center hidden lg:flex">
+    <div className="gap-4 items-center hidden lg:flex">
       <Link
         href={"/study/create"}
         className="flex items-center justify-center gap-2 w-36 py-2 leading-8 text-main-600 border border-solid border-main-600 rounded-[1.3rem]"
